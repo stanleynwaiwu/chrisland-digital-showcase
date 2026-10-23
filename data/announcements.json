@@ -1,0 +1,36 @@
+{
+  "announcements": [
+    {
+      "id": "ann-001",
+      "priority": "normal",
+      "message": "2026/2027 admissions are now open — apply online at admissions.chrislanduniversity.edu.ng",
+      "startDate": "2026-07-01",
+      "endDate": "2026-09-30",
+      "active": true
+    },
+    {
+      "id": "ann-002",
+      "priority": "normal",
+      "message": "Matriculation ceremony holds Friday, 10:00am, University Main Auditorium",
+      "startDate": "2026-08-01",
+      "endDate": "2026-08-15",
+      "active": true
+    },
+    {
+      "id": "ann-003",
+      "priority": "high",
+      "message": "Congratulations to the College of Natural & Applied Sciences on this year's NUC accreditation renewal",
+      "startDate": "2026-07-15",
+      "endDate": "2026-08-31",
+      "active": true
+    },
+    {
+      "id": "ann-004",
+      "priority": "low",
+      "message": "Library extended hours now in effect: 7:00am – 11:00pm daily",
+      "startDate": "2026-08-01",
+      "endDate": "2026-12-15",
+      "active": true
+    }
+  ]
+}

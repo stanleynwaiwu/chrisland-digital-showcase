@@ -1,0 +1,1042 @@
+/* ============================================================
+   ANIMATIONS.CSS
+
+   Reusable keyframes + trigger classes.
+
+   This file contains TWO animation layers:
+
+   1. COMPONENT / SCENE ANIMATIONS
+      - fade
+      - slide
+      - scale
+      - blur
+      - glow
+      - float
+      - pulse
+      - light sweep
+
+   2. PAGE TRANSITIONS
+      Complete scene-to-scene cinematic movement.
+
+   Scene content continues using the existing animation classes.
+   Page transitions are controlled by SceneEngine.
+   ============================================================ */
+
+
+/* ============================================================
+   SCENE / COMPONENT ANIMATIONS
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   FADE
+   ---------------------------------------------------------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+
+.anim-fade-in {
+  animation:
+    fadeIn
+    var(--duration-slow)
+    var(--ease-decelerate)
+    both;
+}
+
+
+.anim-fade-out {
+  animation:
+    fadeOut
+    var(--duration-slow)
+    var(--ease-accelerate)
+    both;
+}
+
+
+/* ----------------------------------------------------------
+   SLIDE UP / DOWN
+   ---------------------------------------------------------- */
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-48px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.anim-slide-up {
+  animation:
+    slideUp
+    var(--duration-slow)
+    var(--ease-emphasized)
+    both;
+}
+
+
+.anim-slide-down {
+  animation:
+    slideDown
+    var(--duration-slow)
+    var(--ease-emphasized)
+    both;
+}
+
+
+/* ----------------------------------------------------------
+   SCALE
+   ---------------------------------------------------------- */
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+
+.anim-scale-in {
+  animation:
+    scaleIn
+    var(--duration-base)
+    var(--ease-emphasized)
+    both;
+}
+
+
+.anim-scale-out {
+  animation:
+    scaleOut
+    var(--duration-base)
+    var(--ease-accelerate)
+    both;
+}
+
+
+/* ----------------------------------------------------------
+   BLUR
+   ---------------------------------------------------------- */
+
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(16px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+
+@keyframes blurOut {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(16px);
+  }
+}
+
+
+.anim-blur-in {
+  animation:
+    blurIn
+    var(--duration-slow)
+    var(--ease-decelerate)
+    both;
+}
+
+
+.anim-blur-out {
+  animation:
+    blurOut
+    var(--duration-slow)
+    var(--ease-accelerate)
+    both;
+}
+
+
+/* ----------------------------------------------------------
+   GLOW
+   ---------------------------------------------------------- */
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 40px
+      rgba(110, 58, 168, 0.35);
+  }
+
+  50% {
+    box-shadow:
+      0 0 90px
+      rgba(255, 107, 53, 0.35);
+  }
+}
+
+
+.anim-glow {
+  animation:
+    glow
+    4s
+    var(--ease-standard)
+    infinite;
+}
+
+
+/* ----------------------------------------------------------
+   LIGHT SWEEP
+   ---------------------------------------------------------- */
+
+@keyframes lightSweep {
+  0% {
+    transform:
+      translateX(-120%)
+      skewX(-12deg);
+  }
+
+  100% {
+    transform:
+      translateX(220%)
+      skewX(-12deg);
+  }
+}
+
+
+.anim-light-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.anim-light-sweep::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    var(--gradient-sweep);
+
+  animation:
+    lightSweep
+    3.2s
+    var(--ease-standard)
+    infinite;
+}
+
+
+/* ----------------------------------------------------------
+   FLOAT
+   ---------------------------------------------------------- */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+
+.anim-float {
+  animation:
+    float
+    6s
+    var(--ease-standard)
+    infinite;
+}
+
+
+/* ----------------------------------------------------------
+   PULSE
+   ---------------------------------------------------------- */
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+
+.anim-pulse {
+  animation:
+    pulse
+    2.4s
+    var(--ease-standard)
+    infinite;
+}
+
+
+/* ----------------------------------------------------------
+   STAGGER HELPERS
+   ---------------------------------------------------------- */
+
+.anim-delay-1 {
+  animation-delay: 120ms;
+}
+
+
+.anim-delay-2 {
+  animation-delay: 240ms;
+}
+
+
+.anim-delay-3 {
+  animation-delay: 360ms;
+}
+
+
+.anim-delay-4 {
+  animation-delay: 480ms;
+}
+
+
+/* ============================================================
+   CINEMATIC PAGE-TO-PAGE TRANSITIONS
+   ============================================================
+
+   These animations operate on the ENTIRE .scene element.
+
+   They are intentionally different from the animations inside
+   individual scenes.
+
+   Think of this as:
+
+      Scene animation = actors moving on the stage
+
+      Page transition = the stage itself changing
+   ============================================================ */
+
+
+/* ----------------------------------------------------------
+   FADE
+   ---------------------------------------------------------- */
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes pageFadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+
+.page-transition-fade-in {
+  animation:
+    pageFadeIn
+    900ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+.page-transition-fade-out {
+  animation:
+    pageFadeOut
+    900ms
+    cubic-bezier(0.55, 0, 0.78, 0)
+    both;
+}
+
+
+/* ============================================================
+   SLIDE
+   ============================================================ */
+
+@keyframes pageSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes pageSlideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+
+@keyframes pageSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+@keyframes pageSlideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+
+@keyframes pageSlideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pageSlideOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+
+@keyframes pageSlideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pageSlideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+
+/* Default slide = left */
+
+.page-transition-slide-in {
+  animation:
+    pageSlideInLeft
+    1100ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+.page-transition-slide-out {
+  animation:
+    pageSlideOutLeft
+    1100ms
+    cubic-bezier(0.55, 0, 0.78, 0)
+    both;
+}
+
+
+/* Directional slide overrides */
+
+.scene[data-transition-direction="right"]
+.page-transition-slide-in {
+  animation-name: pageSlideInRight;
+}
+
+
+.scene[data-transition-direction="right"]
+.page-transition-slide-out {
+  animation-name: pageSlideOutRight;
+}
+
+
+.scene[data-transition-direction="up"]
+.page-transition-slide-in {
+  animation-name: pageSlideInUp;
+}
+
+
+.scene[data-transition-direction="up"]
+.page-transition-slide-out {
+  animation-name: pageSlideOutUp;
+}
+
+
+.scene[data-transition-direction="down"]
+.page-transition-slide-in {
+  animation-name: pageSlideInDown;
+}
+
+
+.scene[data-transition-direction="down"]
+.page-transition-slide-out {
+  animation-name: pageSlideOutDown;
+}
+
+
+/* ============================================================
+   ZOOM
+   ============================================================ */
+
+@keyframes pageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(1.12);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+
+@keyframes pageZoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+    filter: blur(5px);
+  }
+}
+
+
+.page-transition-zoom-in {
+  animation:
+    pageZoomIn
+    1200ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+
+.page-transition-zoom-out {
+  animation:
+    pageZoomOut
+    1200ms
+    cubic-bezier(0.7, 0, 0.84, 0)
+    both;
+}
+
+
+/* ============================================================
+   SCALE
+   ============================================================ */
+
+@keyframes pageScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+@keyframes pageScaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+}
+
+
+.page-transition-scale-in {
+  animation:
+    pageScaleIn
+    1000ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+
+.page-transition-scale-out {
+  animation:
+    pageScaleOut
+    1000ms
+    cubic-bezier(0.7, 0, 0.84, 0)
+    both;
+}
+
+
+/* ============================================================
+   BLUR
+   ============================================================ */
+
+@keyframes pageBlurIn {
+  from {
+    opacity: 0;
+    filter:
+      blur(22px)
+      brightness(1.15);
+    transform: scale(1.025);
+  }
+
+  to {
+    opacity: 1;
+    filter:
+      blur(0)
+      brightness(1);
+    transform: scale(1);
+  }
+}
+
+
+@keyframes pageBlurOut {
+  from {
+    opacity: 1;
+    filter:
+      blur(0)
+      brightness(1);
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    filter:
+      blur(22px)
+      brightness(1.1);
+    transform: scale(0.98);
+  }
+}
+
+
+.page-transition-blur-in {
+  animation:
+    pageBlurIn
+    1000ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+.page-transition-blur-out {
+  animation:
+    pageBlurOut
+    1000ms
+    cubic-bezier(0.55, 0, 0.78, 0)
+    both;
+}
+
+
+/* ============================================================
+   WIPE
+   ============================================================
+
+   The page visually enters as though a curtain is revealing
+   the next chapter.
+   ============================================================ */
+
+@keyframes pageWipeInLeft {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+
+@keyframes pageWipeOutLeft {
+  from {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+
+  to {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+
+@keyframes pageWipeInUp {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+
+@keyframes pageWipeOutUp {
+  from {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+
+  to {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+
+.page-transition-wipe-in {
+  animation:
+    pageWipeInLeft
+    1050ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+
+.page-transition-wipe-out {
+  animation:
+    pageWipeOutLeft
+    1050ms
+    cubic-bezier(0.55, 0, 0.78, 0)
+    both;
+}
+
+
+.scene[data-transition-direction="up"]
+.page-transition-wipe-in {
+  animation-name: pageWipeInUp;
+}
+
+
+.scene[data-transition-direction="up"]
+.page-transition-wipe-out {
+  animation-name: pageWipeOutUp;
+}
+
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+
+@keyframes pageRevealInUp {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pageRevealOutUp {
+  from {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-30px);
+  }
+}
+
+
+@keyframes pageRevealInDown {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+
+@keyframes pageRevealOutDown {
+  from {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(30px);
+  }
+}
+
+
+.page-transition-reveal-in {
+  animation:
+    pageRevealInUp
+    1150ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+
+.page-transition-reveal-out {
+  animation:
+    pageRevealOutUp
+    1150ms
+    cubic-bezier(0.7, 0, 0.84, 0)
+    both;
+}
+
+
+.scene[data-transition-direction="down"]
+.page-transition-reveal-in {
+  animation-name: pageRevealInDown;
+}
+
+
+.scene[data-transition-direction="down"]
+.page-transition-reveal-out {
+  animation-name: pageRevealOutDown;
+}
+
+
+/* ============================================================
+   CINEMATIC
+   ============================================================
+
+   Reserved for special moments.
+
+   This is deliberately slower and more dramatic than the
+   normal transitions. It is useful for the final Contact
+   scene looping back to the opening.
+   ============================================================ */
+
+@keyframes pageCinematicIn {
+  from {
+    opacity: 0;
+    transform:
+      scale(1.08)
+      translateY(18px);
+    filter:
+      blur(12px)
+      brightness(1.2);
+  }
+
+  45% {
+    opacity: 0.75;
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateY(0);
+    filter:
+      blur(0)
+      brightness(1);
+  }
+}
+
+
+@keyframes pageCinematicOut {
+  from {
+    opacity: 1;
+    transform:
+      scale(1)
+      translateY(0);
+    filter:
+      blur(0)
+      brightness(1);
+  }
+
+  45% {
+    opacity: 0.85;
+  }
+
+  to {
+    opacity: 0;
+    transform:
+      scale(0.94)
+      translateY(-18px);
+    filter:
+      blur(12px)
+      brightness(1.15);
+  }
+}
+
+
+.page-transition-cinematic-in {
+  animation:
+    pageCinematicIn
+    1400ms
+    cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+
+.page-transition-cinematic-out {
+  animation:
+    pageCinematicOut
+    1400ms
+    cubic-bezier(0.7, 0, 0.84, 0)
+    both;
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .page-transition-fade-in,
+  .page-transition-fade-out,
+  .page-transition-slide-in,
+  .page-transition-slide-out,
+  .page-transition-zoom-in,
+  .page-transition-zoom-out,
+  .page-transition-scale-in,
+  .page-transition-scale-out,
+  .page-transition-blur-in,
+  .page-transition-blur-out,
+  .page-transition-wipe-in,
+  .page-transition-wipe-out,
+  .page-transition-reveal-in,
+  .page-transition-reveal-out,
+  .page-transition-cinematic-in,
+  .page-transition-cinematic-out {
+    animation: none !important;
+  }
+}

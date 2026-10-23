@@ -1,0 +1,437 @@
+/* ============================================================
+   SCENES/CAMPUS-EXPERIENCE.CSS
+
+   Layout and initial-state styling for the Campus Experience
+   scene.
+
+   Full-screen 2x2 composition of four cinematic video windows.
+
+   Text is presented on a temporary cinematic readability plate
+   rather than directly over the moving footage. The plate is
+   deliberately compact and translucent so the videos remain
+   the dominant visual element.
+
+   Purple/orange accents only.
+   ============================================================ */
+
+
+.campus-experience {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-charcoal-900);
+}
+
+
+/* ----------------------------------------------------------
+   GRID — FOUR VIDEO WINDOWS
+   ---------------------------------------------------------- */
+
+.campus-experience__grid {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  gap: 3px;
+
+  background: var(--color-charcoal-900);
+}
+
+
+.campus-experience__cell {
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+}
+
+
+.campus-experience__cell--tr {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+
+.campus-experience__cell--tl {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+
+.campus-experience__cell--br {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+
+.campus-experience__cell--bl {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+
+.campus-experience__cell-video {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.campus-experience__cell--fallback {
+  background: var(--gradient-hero);
+}
+
+
+/* ----------------------------------------------------------
+   GLOBAL READABILITY OVERLAY
+
+   This is intentionally very subtle.
+
+   The videos should remain bright and visible. The actual
+   readability work is now handled by the cinematic text plate
+   below rather than by a heavy full-screen scrim.
+   ---------------------------------------------------------- */
+
+.campus-experience__overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(20, 16, 28, 0.22) 0%,
+      rgba(20, 16, 28, 0.08) 35%,
+      transparent 58%
+    );
+}
+
+
+/* ----------------------------------------------------------
+   TOP-LEFT KICKER
+   ---------------------------------------------------------- */
+
+.campus-experience__label {
+  position: absolute;
+
+  top: var(--safe-margin);
+  left: var(--safe-margin);
+
+  z-index: 3;
+
+  opacity: 0;
+
+  padding: 0.55rem 0.8rem;
+
+  border-left: 2px solid var(--color-orange-300);
+
+  background: rgba(20, 16, 28, 0.62);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+
+  font-family: var(--font-mono);
+
+  font-size: var(--text-2xs);
+
+  font-weight: var(--weight-semibold);
+
+  letter-spacing: var(--tracking-wider);
+
+  text-transform: uppercase;
+
+  color: var(--color-white);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+
+/* ----------------------------------------------------------
+   CINEMATIC TEXT PLATE
+
+   This is the major visual refinement.
+
+   Instead of placing white text directly on moving footage,
+   the text receives its own restrained dark surface.
+
+   It is:
+   - translucent
+   - softly blurred behind
+   - slightly bordered
+   - compact
+   - centered
+   - wide enough for comfortable reading
+   - small enough to preserve the video composition
+
+   The videos remain visible around the plate.
+   ---------------------------------------------------------- */
+
+.campus-experience__content {
+  position: absolute;
+
+  left: 50%;
+  bottom: var(--space-lg);
+
+  transform: translateX(-50%);
+
+  z-index: 3;
+
+  width: min(62%, 760px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  gap: var(--space-sm);
+
+  padding:
+    clamp(1.2rem, 2.2vw, 2rem)
+    clamp(1.4rem, 3vw, 2.6rem);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(20, 16, 28, 0.86),
+      rgba(20, 16, 28, 0.72)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.38),
+    0 4px 18px rgba(0, 0, 0, 0.25);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* ----------------------------------------------------------
+   HEADING
+   ---------------------------------------------------------- */
+
+.campus-experience__heading-row {
+  opacity: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: var(--space-xs);
+
+  width: 100%;
+}
+
+
+.campus-experience__accent-bar {
+  width: 4px;
+
+  height: 38px;
+
+  border-radius: var(--radius-full);
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-orange-300) 0%,
+      var(--color-purple-500) 100%
+    );
+
+  flex-shrink: 0;
+}
+
+
+.campus-experience__heading {
+  margin: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  font-size:
+    clamp(
+      2.6rem,
+      3.2vw,
+      var(--text-lg)
+    );
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text-primary);
+
+  max-width: 20ch;
+
+  text-align: left;
+}
+
+
+/* ----------------------------------------------------------
+   BODY COPY
+   ---------------------------------------------------------- */
+
+.campus-experience__body {
+  opacity: 0;
+
+  margin: 0;
+
+  max-width: 52ch;
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-sm);
+
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-primary);
+
+  text-align: center;
+}
+
+
+/* ----------------------------------------------------------
+   HIGHLIGHTS
+   ---------------------------------------------------------- */
+
+.campus-experience__highlights {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: var(--space-lg);
+
+  flex-wrap: wrap;
+
+  width: 100%;
+
+  padding-top: var(--space-2xs);
+}
+
+
+.campus-experience__highlight {
+  opacity: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-2xs);
+}
+
+
+.campus-experience__highlight-mark {
+  width: 12px;
+  height: 12px;
+
+  border-radius: var(--radius-full);
+
+  background:
+    radial-gradient(
+      circle,
+      var(--color-orange-300) 0%,
+      var(--color-purple-500) 75%
+    );
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 0 10px rgba(255, 107, 53, 0.28);
+}
+
+
+.campus-experience__highlight-label {
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-medium);
+
+  font-size: var(--text-xs);
+
+  letter-spacing: var(--tracking-normal);
+
+  color: var(--color-text-primary);
+
+  white-space: nowrap;
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE — 1440px AND BELOW
+   ---------------------------------------------------------- */
+
+@media (max-width: 1440px) {
+
+  .campus-experience__label {
+    top: var(--space-md);
+    left: var(--space-md);
+  }
+
+
+  .campus-experience__content {
+    bottom: var(--space-md);
+
+    width: min(76%, 660px);
+
+    padding:
+      var(--space-md)
+      var(--space-lg);
+
+    gap: var(--space-xs);
+  }
+
+
+  .campus-experience__heading {
+    font-size: clamp(
+      2.4rem,
+      3vw,
+      var(--text-lg)
+    );
+  }
+
+
+  .campus-experience__body {
+    max-width: 50ch;
+  }
+
+
+  .campus-experience__highlights {
+    gap: var(--space-sm);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .campus-experience__cell,
+  .campus-experience__label,
+  .campus-experience__heading-row,
+  .campus-experience__body,
+  .campus-experience__highlight {
+    opacity: 1;
+  }
+}

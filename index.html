@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1920, initial-scale=1.0, user-scalable=no" />
+  <title>Chrisland Experience — Chrisland University</title>
+  <meta name="description" content="Chrisland University digital signage experience." />
+
+  <!-- Design tokens load first — every other stylesheet depends on them -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+
+  <!-- Scene-specific stylesheets -->
+  <link rel="stylesheet" href="scenes/opening-logo.css" />
+  <link rel="stylesheet" href="scenes/welcome-scene.css" />
+  <link rel="stylesheet" href="scenes/vision-mission.css" />
+  <link rel="stylesheet" href="scenes/campus-experience.css" />
+  <link rel="stylesheet" href="scenes/academic-programmes.css" />
+  <link rel="stylesheet" href="scenes/student-life.css" />
+  <link rel="stylesheet" href="scenes/research-innovation.css" />
+  <link rel="stylesheet" href="scenes/graduate-success.css" />
+  <link rel="stylesheet" href="scenes/admissions.css" />
+  <link rel="stylesheet" href="scenes/contact.css" />
+
+  <!-- Phase 11 — dynamic scenes (disabled by default; see js/app.js) -->
+  <link rel="stylesheet" href="scenes/dynamic-sections.css" />
+  <link rel="stylesheet" href="scenes/latest-updates.css" />
+  <link rel="stylesheet" href="scenes/latest-news.css" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADING SCREEN
+       Shown until app.js confirms settings + assets are ready,
+       then fades out to reveal the display container.
+       ============================================================ -->
+  <div id="loading-screen" class="full-screen center-layout" aria-hidden="true">
+    <div class="loading-screen__content flex-col items-center gap-md">
+      <div class="loading-screen__mark anim-glow" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       DISPLAY CONTAINER
+       The permanent full-screen canvas. Everything the audience
+       sees lives inside this element, stacked into four layers.
+       ============================================================ -->
+  <main id="display-container" class="full-screen" aria-live="polite">
+
+    <!-- Background Layer — ambient gradients, particles, video loops -->
+    <div id="background-layer" class="layer-stack layer-stack--background"></div>
+
+    <!-- Scene Container — scene-engine.js swaps active scene markup here -->
+    <div id="scene-container" class="layer-stack layer-stack--scene"></div>
+
+    <!-- Foreground Layer — persistent chrome: logo, clock, ticker -->
+    <div id="foreground-layer" class="layer-stack layer-stack--foreground"></div>
+
+    <!-- Transition Layer — wipes, fades, and reveals between scenes -->
+    <div id="transition-layer" class="layer-stack layer-stack--transition"></div>
+
+    <!-- Overlay Layer — announcements, alerts, always above everything -->
+    <div id="overlay-layer" class="layer-stack layer-stack--overlay"></div>
+
+  </main>
+
+  <!-- App entry point — ES module -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

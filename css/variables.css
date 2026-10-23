@@ -1,0 +1,173 @@
+/* ============================================================
+   VARIABLES.CSS
+   Chrisland Experience — Design Token System
+   Single source of truth for every visual decision in the
+   project. Every other stylesheet reads from these tokens —
+   never hard-code a colour, size, or timing value elsewhere.
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     COLOUR — Core Palette
+     Purple carries authority and intellect. Orange carries
+     energy and warmth. Charcoal grounds the whole system so
+     the palette reads as premium rather than playful.
+     ---------------------------------------------------------- */
+  --color-purple-900:   #2E1547;   /* deepest shade — backgrounds, overlays */
+  --color-purple-700:   #4B1F73;   /* primary purple */
+  --color-purple-500:   #6E3AA8;   /* mid purple — gradients, hover */
+  --color-purple-300:   #A87FD1;   /* light purple — accents on dark */
+
+  --color-orange-700:   #D94E1F;   /* deep orange — grounded accent */
+  --color-orange-500:   #FF6B35;   /* primary orange */
+  --color-orange-300:   #FFA45B;   /* light orange — highlights, glows */
+
+  --color-white:        #FFFFFF;
+  --color-gray-050:     #F6F5F9;   /* very light gray — panel backgrounds */
+  --color-gray-100:     #EAE7F0;   /* hairlines, dividers on light */
+  --color-gray-400:     #9C96A8;   /* muted text on light */
+
+  --color-charcoal-900: #14101C;   /* darkest — primary display background */
+  --color-charcoal-700: #1F1A2B;   /* raised panels on dark */
+  --color-charcoal-500: #322A42;   /* borders / separators on dark */
+
+  /* ----------------------------------------------------------
+     COLOUR — Semantic Roles
+     Reference these in components, not the raw palette above,
+     so the palette can shift without touching component CSS.
+     ---------------------------------------------------------- */
+  --color-bg-primary:       var(--color-charcoal-900);
+  --color-bg-surface:       var(--color-charcoal-700);
+  --color-bg-light:         var(--color-gray-050);
+
+  --color-text-primary:     var(--color-white);
+  --color-text-muted:       var(--color-gray-100);
+  --color-text-on-light:    var(--color-charcoal-900);
+
+  --color-accent-primary:   var(--color-purple-500);
+  --color-accent-secondary: var(--color-orange-500);
+
+  --gradient-hero:      linear-gradient(135deg, var(--color-purple-900) 0%, var(--color-purple-700) 45%, var(--color-orange-700) 100%);
+  --gradient-glow:      radial-gradient(circle at 50% 30%, var(--color-purple-500) 0%, transparent 60%);
+  --gradient-sweep:     linear-gradient(100deg, transparent 30%, rgba(255,255,255,0.18) 45%, transparent 60%);
+  --gradient-panel:     linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%);
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY
+     Display face: Fraunces — an editorial serif with enough
+     weight and character to feel like a university, not a
+     startup. Body / UI face: Inter — clean, highly legible at
+     a distance, built for screens. Utility face: IBM Plex Mono
+     for timestamps, tickers, and small data labels.
+     ---------------------------------------------------------- */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body:    'Inter', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Type scale — tuned for 1920x1080 viewing at distance.
+     Base unit assumes a 10px root (see main.css html{font-size}) */
+  --text-3xs:  1.2rem;    /* 12px  — ticker / captions */
+  --text-2xs:  1.6rem;    /* 16px  — small labels */
+  --text-xs:   2.0rem;    /* 20px  — body small */
+  --text-sm:   2.4rem;    /* 24px  — body */
+  --text-md:   3.2rem;    /* 32px  — body large / sub-headings */
+  --text-lg:   4.8rem;    /* 48px  — section headings */
+  --text-xl:   6.4rem;    /* 64px  — scene headings */
+  --text-2xl:  9.6rem;    /* 96px  — hero headings */
+  --text-3xl:  13.6rem;   /* 136px — hero statement type */
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+  --weight-black:    900;
+
+  --leading-tight:  1.05;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:  0.08em;
+  --tracking-wider: 0.16em;   /* eyebrow labels, kickers */
+
+  /* ----------------------------------------------------------
+     SPACING SCALE
+     ---------------------------------------------------------- */
+  --space-3xs: 0.4rem;
+  --space-2xs: 0.8rem;
+  --space-xs:  1.6rem;
+  --space-sm:  2.4rem;
+  --space-md:  4.0rem;
+  --space-lg:  6.4rem;
+  --space-xl:  9.6rem;
+  --space-2xl: 12.8rem;
+  --space-3xl: 16.0rem;
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     ---------------------------------------------------------- */
+  --radius-sm:  0.8rem;
+  --radius-md:  1.6rem;
+  --radius-lg:  2.4rem;
+  --radius-xl:  3.2rem;
+  --radius-full: 999px;
+
+  /* ----------------------------------------------------------
+     SHADOW SYSTEM
+     Purple-tinted shadows keep dark-on-dark elevation feeling
+     intentional rather than muddy.
+     ---------------------------------------------------------- */
+  --shadow-sm:  0 2px 8px rgba(20, 16, 28, 0.35);
+  --shadow-md:  0 8px 24px rgba(20, 16, 28, 0.45);
+  --shadow-lg:  0 24px 64px rgba(20, 16, 28, 0.55);
+  --shadow-glow-purple: 0 0 80px rgba(110, 58, 168, 0.45);
+  --shadow-glow-orange: 0 0 80px rgba(255, 107, 53, 0.35);
+  --shadow-inset-glass: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  /* ----------------------------------------------------------
+     GLASSMORPHISM
+     ---------------------------------------------------------- */
+  --glass-bg:      rgba(255, 255, 255, 0.06);
+  --glass-border:  rgba(255, 255, 255, 0.14);
+  --glass-blur:    blur(24px);
+
+  /* ----------------------------------------------------------
+     ANIMATION TIMING
+     ---------------------------------------------------------- */
+  --duration-instant: 120ms;
+  --duration-fast:    280ms;
+  --duration-base:    480ms;
+  --duration-slow:    800ms;
+  --duration-scene:   1200ms;
+  --duration-ambient: 6000ms;
+
+  --ease-standard:  cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0.0, 0, 1);
+
+  /* ----------------------------------------------------------
+     Z-INDEX LAYERS
+     Mirrors the four physical layers described in index.html.
+     ---------------------------------------------------------- */
+  --z-background:  10;
+  --z-scene:       20;
+  --z-foreground:  30;
+  --z-transition:  40;
+  --z-overlay:     50;
+  --z-loading:     100;
+
+  /* ----------------------------------------------------------
+     CONTAINER WIDTHS
+     Designed around a 1920x1080 canvas with safe margins so
+     content never touches bezel edges.
+     ---------------------------------------------------------- */
+  --canvas-width:   1920px;
+  --canvas-height:  1080px;
+  --safe-margin:    96px;
+  --container-full: 100%;
+  --container-wide: 1760px;
+  --container-narrow: 1200px;
+}

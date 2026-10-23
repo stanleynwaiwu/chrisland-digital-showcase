@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Chrisland Experience Admin</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="admin-body">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <span class="admin-sidebar__mark" aria-hidden="true"></span>
+        <span class="admin-sidebar__title">Chrisland Experience</span>
+      </div>
+      <nav class="admin-nav" aria-label="Admin sections">
+        <a class="admin-nav__item" data-nav="dashboard" href="index.html">Dashboard</a>
+        <a class="admin-nav__item" data-nav="presentation" href="presentation.html">Presentation</a>
+        <a class="admin-nav__item" data-nav="updates" href="updates.html">Updates</a>
+        <a class="admin-nav__item" data-nav="news" href="news.html">News</a>
+        <a class="admin-nav__item" data-nav="scene-content" href="scene-content.html">Scene Content</a>
+        <span class="admin-nav__item admin-nav__item--disabled" aria-disabled="true">Media <small>Soon</small></span>
+        <span class="admin-nav__item admin-nav__item--disabled" aria-disabled="true">Settings <small>Soon</small></span>
+      </nav>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <h1 class="admin-topbar__title">Dashboard</h1>
+        <div class="admin-topbar__user">
+          <span id="admin-username"></span>
+          <button id="admin-logout" type="button" class="admin-button admin-button--ghost">Log Out</button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <p id="dashboard-error" class="admin-error" hidden></p>
+
+        <section class="stat-grid">
+          <div class="stat-card">
+            <p class="stat-card__label">Total Scenes</p>
+            <p class="stat-card__value" id="stat-total-scenes">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">Active Scenes</p>
+            <p class="stat-card__value" id="stat-active-scenes">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">Inactive Scenes</p>
+            <p class="stat-card__value" id="stat-inactive-scenes">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">Latest Updates</p>
+            <p class="stat-card__value" id="stat-updates-count">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">News Items</p>
+            <p class="stat-card__value" id="stat-news-count">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">Autoplay</p>
+            <p class="stat-card__value" id="stat-autoplay">—</p>
+          </div>
+          <div class="stat-card">
+            <p class="stat-card__label">Loop</p>
+            <p class="stat-card__value" id="stat-loop">—</p>
+          </div>
+        </section>
+
+        <section class="admin-panel">
+          <h2>Manage the Presentation</h2>
+          <p>Enable or disable scenes, reorder the playlist, and configure duration overrides.</p>
+          <a class="admin-button admin-button--primary" href="presentation.html">Open Presentation Manager</a>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/dashboard-page.js"></script>
+</body>
+</html>

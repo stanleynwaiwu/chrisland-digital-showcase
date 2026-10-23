@@ -1,0 +1,203 @@
+/* ============================================================
+   SCENES/WELCOME-SCENE.CSS
+   Layout and initial-state styling for the Welcome scene.
+   Reuses colour, spacing, timing and easing tokens from
+   css/variables.css, and the .hero-layout utility from
+   css/layout.css for the headline block. No cards, glass panels,
+   or floating containers — the photo dominates; text sits
+   directly on a readability gradient.
+
+   The one new motion here — the slow background "Ken Burns"
+   zoom — is defined locally as it belongs to this scene alone,
+   not the shared animation engine.
+   ============================================================ */
+
+.welcome-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-charcoal-900);
+}
+
+/* ----------------------------------------------------------
+   BACKGROUND — full-bleed photo with a slow continuous zoom.
+   Falls back to a premium gradient if the placeholder image
+   is missing (class added by welcome-scene.js on img error).
+   ---------------------------------------------------------- */
+.welcome-scene__background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.welcome-scene__background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  animation: welcomeKenBurns 12s var(--ease-standard) 0.5s both;
+}
+
+.welcome-scene__background--fallback {
+  background: var(--gradient-hero);
+}
+
+@keyframes welcomeKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+/* ----------------------------------------------------------
+   OVERLAY — subtle gradient purely for text legibility, not an
+   animated element. Present immediately, no entrance timing.
+   ---------------------------------------------------------- */
+.welcome-scene__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(0deg, rgba(20, 16, 28, 0.85) 0%, rgba(20, 16, 28, 0.25) 45%, rgba(20, 16, 28, 0.15) 100%),
+    linear-gradient(90deg, rgba(20, 16, 28, 0.55) 0%, transparent 40%);
+}
+
+/* ----------------------------------------------------------
+   CONTENT — headline block, reuses .hero-layout for bottom-
+   anchored positioning. Hidden until its 1.2s timeline step.
+   ---------------------------------------------------------- */
+.welcome-scene__content {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  padding-bottom: var(--space-2xl);
+}
+
+.welcome-scene__eyebrow {
+  margin-bottom: var(--space-2xs);
+}
+
+.welcome-scene__title {
+  max-width: 18ch;
+}
+
+.welcome-scene__tagline {
+  opacity: 0;
+  margin-top: var(--space-sm);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------
+   BOTTOM-LEFT — location
+   ---------------------------------------------------------- */
+.welcome-scene__location {
+  position: absolute;
+  left: var(--safe-margin);
+  bottom: var(--safe-margin);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+  opacity: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.welcome-scene__location span:first-child {
+  color: var(--color-text-primary);
+  font-weight: var(--weight-medium);
+}
+
+/* ----------------------------------------------------------
+   BOTTOM-RIGHT — website + QR placeholder
+   ---------------------------------------------------------- */
+.welcome-scene__meta {
+  position: absolute;
+  right: var(--safe-margin);
+  bottom: var(--safe-margin);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.welcome-scene__website {
+  opacity: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+}
+
+.welcome-scene__qr {
+  opacity: 0;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: var(--text-3xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.welcome-scene__qr-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.welcome-scene__qr--fallback {
+  padding: var(--space-2xs);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — scales down gracefully below 1920x1080; the
+   rem-based type scale and vw-aware root font-size in main.css
+   already handle most of this. This only tightens the safe
+   margin on notably smaller canvases (e.g. 1366x768) so nothing
+   crowds the edges.
+   ---------------------------------------------------------- */
+@media (max-width: 1440px) {
+  .welcome-scene__location,
+  .welcome-scene__meta {
+    left: var(--space-md);
+    right: var(--space-md);
+    bottom: var(--space-md);
+  }
+
+  .welcome-scene__content {
+    padding-bottom: var(--space-lg);
+  }
+}
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY — guarantee the correct end state when motion
+   is disabled (main.css already collapses animation durations
+   globally; this only ensures our own base opacity: 0 elements
+   still resolve to visible).
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-scene__content,
+  .welcome-scene__tagline,
+  .welcome-scene__location,
+  .welcome-scene__website,
+  .welcome-scene__qr {
+    opacity: 1;
+  }
+
+  .welcome-scene__background-image {
+    animation: none;
+    transform: scale(1);
+  }
+}

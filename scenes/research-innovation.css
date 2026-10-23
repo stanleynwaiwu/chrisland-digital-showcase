@@ -1,0 +1,527 @@
+/* ============================================================
+   SCENES/RESEARCH-INNOVATION.CSS
+
+   Scene 007 — Research, Innovation & Facilities.
+
+   Editorial cinematic mosaic:
+   - Left: concise editorial text.
+   - Right: asymmetric four-image mosaic.
+   - Premium gradient background.
+   - Deliberately raised content position to maintain equal
+     breathing room at the top and bottom.
+   ============================================================ */
+
+
+.research-innovation {
+
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+
+  grid-template-columns: 38% 62%;
+
+  overflow: hidden;
+
+  background: var(--color-charcoal-900);
+}
+
+
+/* ----------------------------------------------------------
+   BACKGROUND
+   ---------------------------------------------------------- */
+
+.research-innovation__background {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: var(--gradient-hero);
+
+  opacity: 0.4;
+}
+
+
+/* ----------------------------------------------------------
+   LEFT — TEXT CONTENT
+   ----------------------------------------------------------
+
+   Instead of using justify-content:center, the content is
+   deliberately positioned slightly above the mathematical
+   center.
+
+   This prevents the highlights at the bottom from being
+   pushed against the lower edge on smaller screens.
+   ---------------------------------------------------------- */
+
+.research-innovation__content {
+
+  position: absolute;
+
+  left: 0;
+
+  top: 50%;
+
+  transform: translateY(-53%);
+
+  z-index: 2;
+
+  width: 38%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-sm);
+
+  padding-left: var(--space-xl);
+
+  padding-right: var(--space-lg);
+}
+
+
+/* ----------------------------------------------------------
+   LABEL
+   ---------------------------------------------------------- */
+
+.research-innovation__label {
+
+  opacity: 0;
+
+  margin: 0;
+
+  font-family: var(--font-mono);
+
+  font-size: var(--text-2xs);
+
+  font-weight: var(--weight-semibold);
+
+  letter-spacing: var(--tracking-wider);
+
+  text-transform: uppercase;
+
+  color: var(--color-orange-300);
+}
+
+
+/* ----------------------------------------------------------
+   HERO HEADING
+   ---------------------------------------------------------- */
+
+.research-innovation__heading {
+
+  opacity: 0;
+
+  margin: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  /*
+   * Slightly reduced from the previous version.
+   * The shorter headline should now feel intentional rather
+   * than oversized.
+   */
+
+  font-size: clamp(
+    3rem,
+    3.2vw,
+    var(--text-lg)
+  );
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text-primary);
+
+  max-width: 12ch;
+}
+
+
+/* ----------------------------------------------------------
+   BODY
+   ---------------------------------------------------------- */
+
+.research-innovation__body {
+
+  opacity: 0;
+
+  margin: var(--space-2xs) 0 0;
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-sm);
+
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-muted);
+
+  max-width: 42ch;
+}
+
+
+/* ----------------------------------------------------------
+   HIGHLIGHTS
+   ---------------------------------------------------------- */
+
+.research-innovation__highlights {
+
+  margin-top: var(--space-sm);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: var(--space-sm) var(--space-lg);
+}
+
+
+/* ----------------------------------------------------------
+   INDIVIDUAL HIGHLIGHT
+   ---------------------------------------------------------- */
+
+.research-innovation__highlight {
+
+  opacity: 0;
+
+  padding-top: var(--space-2xs);
+
+  border-top:
+    1px solid
+    var(--color-purple-500);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-2xs);
+}
+
+
+/* ----------------------------------------------------------
+   HIGHLIGHT MARK
+   ---------------------------------------------------------- */
+
+.research-innovation__highlight-mark {
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: var(--radius-full);
+
+  background:
+    radial-gradient(
+      circle,
+      var(--color-orange-300) 0%,
+      var(--color-purple-500) 75%
+    );
+
+  flex-shrink: 0;
+}
+
+
+/* ----------------------------------------------------------
+   HIGHLIGHT LABEL
+   ---------------------------------------------------------- */
+
+.research-innovation__highlight-label {
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-medium);
+
+  font-size: var(--text-xs);
+
+  color: var(--color-text-primary);
+
+  white-space: nowrap;
+}
+
+
+/* ----------------------------------------------------------
+   RIGHT — MOSAIC
+   ----------------------------------------------------------
+
+   The mosaic gets a little more breathing room from the
+   bottom and top than before.
+
+   This also prevents the image composition from touching
+   the screen edges.
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic {
+
+  position: relative;
+
+  z-index: 1;
+
+  grid-column: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    2fr
+    1fr
+    1fr;
+
+  grid-template-rows:
+    1fr
+    1fr;
+
+  gap: 4px;
+
+  /*
+   * Equal top and bottom breathing room.
+   */
+
+  padding:
+    var(--space-xl)
+    var(--space-xl)
+    var(--space-xl)
+    0;
+}
+
+
+/* ----------------------------------------------------------
+   MOSAIC TILE
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item {
+
+  position: relative;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  /*
+   * Phase 16: administrators can now replace these photographs, and an
+   * uploaded picture's own size/aspect ratio must never stretch the grid
+   * tracks. min-size 0 lets the 1fr tracks stay equal; the image itself is
+   * taken out of flow (below) and cropped to the tile with object-fit.
+   */
+  min-width: 0;
+
+  min-height: 0;
+}
+
+
+/* ----------------------------------------------------------
+   LARGE IMAGE
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item--large {
+
+  grid-column: 1;
+
+  grid-row: 1 / 3;
+}
+
+
+/* ----------------------------------------------------------
+   MEDIUM IMAGE
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item--medium {
+
+  grid-column: 2 / 4;
+
+  grid-row: 1;
+}
+
+
+/* ----------------------------------------------------------
+   SMALL IMAGES
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item--small:nth-of-type(3) {
+
+  grid-column: 2;
+
+  grid-row: 2;
+}
+
+
+.research-innovation__mosaic-item--small:nth-of-type(4) {
+
+  grid-column: 3;
+
+  grid-row: 2;
+}
+
+
+/* ----------------------------------------------------------
+   IMAGE
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-image {
+
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform-origin: center;
+
+  animation:
+    mosaicBreathe
+    7s
+    var(--ease-standard)
+    7s
+    infinite;
+}
+
+
+/* ----------------------------------------------------------
+   FALLBACK
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item--fallback {
+
+  background:
+    var(--gradient-glow),
+    var(--gradient-hero);
+}
+
+
+/* ----------------------------------------------------------
+   STAGGERED AMBIENT MOTION
+   ---------------------------------------------------------- */
+
+.research-innovation__mosaic-item--large
+.research-innovation__mosaic-image {
+
+  animation-delay: 7s;
+}
+
+
+.research-innovation__mosaic-item--medium
+.research-innovation__mosaic-image {
+
+  animation-delay: 7.4s;
+}
+
+
+.research-innovation__mosaic-item--small:nth-of-type(3)
+.research-innovation__mosaic-image {
+
+  animation-delay: 7.8s;
+}
+
+
+.research-innovation__mosaic-item--small:nth-of-type(4)
+.research-innovation__mosaic-image {
+
+  animation-delay: 8.2s;
+}
+
+
+@keyframes mosaicBreathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE — 1440px AND BELOW
+   ---------------------------------------------------------- */
+
+@media (max-width: 1440px) {
+
+  .research-innovation__content {
+
+    width: 40%;
+
+    padding-left: var(--space-md);
+
+    padding-right: var(--space-md);
+
+    transform: translateY(-53%);
+  }
+
+
+  .research-innovation__heading {
+
+    font-size: clamp(
+      2.8rem,
+      3.1vw,
+      var(--text-lg)
+    );
+  }
+
+
+  .research-innovation__body {
+
+    max-width: 40ch;
+
+    font-size: var(--text-sm);
+  }
+
+
+  .research-innovation__mosaic {
+
+    padding:
+      var(--space-lg)
+      var(--space-md)
+      var(--space-lg)
+      0;
+
+    gap: 3px;
+  }
+
+
+  .research-innovation__highlights {
+
+    gap:
+      var(--space-2xs)
+      var(--space-md);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY
+   ---------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .research-innovation__label,
+
+  .research-innovation__heading,
+
+  .research-innovation__body,
+
+  .research-innovation__highlight,
+
+  .research-innovation__mosaic-item {
+
+    opacity: 1;
+  }
+
+
+  .research-innovation__mosaic-item,
+
+  .research-innovation__mosaic-image {
+
+    animation: none;
+
+    transform: scale(1);
+  }
+}

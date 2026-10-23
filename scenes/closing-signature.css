@@ -1,0 +1,160 @@
+/* ============================================================
+   SCENES/CLOSING-SIGNATURE.CSS
+   Layout and initial-state styling for the Closing Signature
+   scene. Minimal, fully centred composition — no cards, no
+   panels, no grids. Premium dark gradient + a soft ambient glow
+   + a few drifting particles, echoing the Opening Logo Reveal
+   for bookend continuity. Reuses colour, spacing, timing and
+   easing tokens from css/variables.css, and the existing
+   .anim-glow / .anim-float classes from animations.css.
+   Purple/orange accents only.
+   ============================================================ */
+
+.closing-signature {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-charcoal-900);
+}
+
+/* ----------------------------------------------------------
+   BACKDROP + GLOW — same visual language as the Opening Logo
+   Reveal, so the loop feels like one continuous piece.
+   ---------------------------------------------------------- */
+.closing-signature__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  opacity: 0.5;
+}
+
+.closing-signature__glow {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-glow);
+  opacity: 0;
+  border-radius: var(--radius-full);
+}
+
+/* ----------------------------------------------------------
+   PARTICLES — a few, small, soft — continuing the ambient
+   feel from the previous scene rather than introducing anything
+   new.
+   ---------------------------------------------------------- */
+.closing-signature__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.closing-signature__particle {
+  position: absolute;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  opacity: 0.3;
+  filter: blur(0.5px);
+}
+
+/* ----------------------------------------------------------
+   CONTENT — centred column: logo, name, tagline, thank-you.
+   ---------------------------------------------------------- */
+.closing-signature__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+}
+
+.closing-signature__mark {
+  opacity: 0;
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+}
+
+.closing-signature__mark-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.closing-signature__mark--fallback {
+  background: var(--gradient-panel);
+  border: 1px solid var(--glass-border);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-text-muted);
+}
+
+.closing-signature__name {
+  opacity: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: clamp(3.2rem, 3.6vw, var(--text-lg));
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-primary);
+}
+
+.closing-signature__tagline {
+  opacity: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--color-orange-300);
+}
+
+.closing-signature__thank-you {
+  opacity: 0;
+  margin-top: var(--space-xs);
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-md);
+  color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------
+   WEBSITE — small text, bottom of the screen.
+   ---------------------------------------------------------- */
+.closing-signature__website {
+  opacity: 0;
+  position: absolute;
+  left: 50%;
+  bottom: var(--safe-margin);
+  transform: translateX(-50%);
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-3xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-muted);
+}
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY — guarantee the correct end state when motion
+   is disabled. The 10.5s pre-exit fade is skipped too, since it
+   is itself a motion effect, not core content.
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .closing-signature__glow,
+  .closing-signature__mark,
+  .closing-signature__name,
+  .closing-signature__tagline,
+  .closing-signature__thank-you,
+  .closing-signature__website {
+    opacity: 1;
+  }
+}

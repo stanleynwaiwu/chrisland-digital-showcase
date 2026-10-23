@@ -1,0 +1,306 @@
+/* ============================================================
+   SCENES/VISION-MISSION.CSS
+   Layout and initial-state styling for the Vision, Mission &
+   Core Values scene. Editorial split-screen: 40% content column,
+   60% framed photo. No cards, no glassmorphism — thin divider
+   lines separate the three content blocks instead. Reuses
+   colour, spacing, timing and easing tokens from
+   css/variables.css. Purple/orange accents only.
+
+   Presentation Polish pass: the photo now sits in an inset,
+   moderately-proportioned editorial frame instead of a full-bleed
+   panel that force-cropped every image edge to edge; block text
+   now supports multiple short statements per block with a little
+   extra breathing room between them.
+   ============================================================ */
+
+.vision-mission {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  background: var(--color-charcoal-900);
+}
+
+/* ----------------------------------------------------------
+   LEFT — editorial content column
+   ---------------------------------------------------------- */
+.vision-mission__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Vertical padding/gap are viewport-height-aware (clamp with a
+     vh component), not fixed rem values — on a viewport that is
+     wide but comparatively short (e.g. a large external monitor
+     where the root font-size scales up with width), fixed rem
+     padding could out-grow the available height and push content
+     below the visible area. clamp() keeps a sensible minimum and
+     maximum while shrinking automatically as vh shrinks. */
+  padding: clamp(2.4rem, 6vh, var(--space-2xl)) var(--space-xl);
+  gap: clamp(1.6rem, 3vh, var(--space-lg));
+  max-height: 100%;
+}
+
+.vision-mission__heading-group {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.vision-mission__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wider);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  color: var(--color-orange-300);
+}
+
+.vision-mission__heading {
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: clamp(3.2rem, 3.4vw, var(--text-lg));
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-text-primary);
+  max-width: 16ch;
+}
+
+/* ----------------------------------------------------------
+   ROTATING PANEL — Vision, Mission and Core Values share this
+   one general area, stacked on top of each other (position:
+   absolute) rather than following one another down the page.
+   Only one is ever opacity:1 at a time (see vision-mission.js),
+   so the text always reads as a single clean block instead of
+   several competing for attention. min-height is sized generously
+   for the longest section (Mission, three statements) plus the
+   small per-section position offsets below, so switching sections
+   never clips or shifts the column.
+   ---------------------------------------------------------- */
+.vision-mission__panel {
+  position: relative;
+  min-height: clamp(220px, 28vh, 340px);
+}
+
+.vision-mission__panel .vision-mission__block {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+
+/* Each chapter gets a small, deliberate vertical offset — subtle
+   enough to preserve reading hierarchy, distinct enough that the
+   composition reads as intentionally changing rather than the
+   same box repeating three times. top/left are used (not
+   transform) so they never conflict with the slide-up entrance/
+   exit animation, which animates transform separately. */
+.vision-mission__block--vision {
+  top: 0;
+}
+
+.vision-mission__block--mission {
+  top: 26px;
+}
+
+.vision-mission__block--core-values {
+  top: 12px;
+}
+
+/* ----------------------------------------------------------
+   CONTENT BLOCKS — separated by a thin divider line, not cards.
+   Each block may hold more than one short statement; a small gap
+   between statements keeps two-sentence blocks scannable instead
+   of reading as one crowded paragraph.
+   ---------------------------------------------------------- */
+.vision-mission__block {
+  opacity: 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-purple-500);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.vision-mission__block-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-3xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wider);
+  color: var(--color-orange-300);
+  margin-bottom: var(--space-3xs);
+}
+
+.vision-mission__block-statement {
+  opacity: 1;
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-xs);
+  line-height: var(--leading-normal);
+  color: var(--color-text-muted);
+  max-width: 44ch;
+}
+
+/* Second-and-later statements use the brighter primary colour, same
+   as before this pass. Their slightly dimmer RESTING opacity
+   (0.85, vs. 1 for the first statement) is now set directly by the
+   staggered reveal in vision-mission.js instead of this selector,
+   since opacity here needs to start at 0 and animate in per
+   statement — but the colour distinction itself is unchanged. */
+.vision-mission__block-statement + .vision-mission__block-statement {
+  color: var(--color-text-primary);
+}
+
+/* ----------------------------------------------------------
+   RIGHT — editorial photo frame. Inset within the 60% column
+   rather than stretched full-bleed to every edge, so the crop
+   ratio is far less extreme and both landscape and portrait
+   photography sit comfortably. A soft edge mask blends the frame
+   into the background instead of a hard rectangular cut.
+   ---------------------------------------------------------- */
+.vision-mission__media {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.4rem, 6vh, var(--space-2xl)) clamp(2.4rem, 6vh, var(--space-2xl)) clamp(2.4rem, 6vh, var(--space-2xl)) 0;
+  opacity: 0;
+  /* Perspective for the card-turn below — lets the frame's rotateY
+     read as a physical turn in space rather than a flat squash. */
+  perspective: 1600px;
+}
+
+.vision-mission__media-frame {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg);
+  /* Soft vignette at the very edges — disguises the transition
+     from photo to background instead of a hard-edged cutoff. */
+  -webkit-mask-image: radial-gradient(ellipse at center, black 92%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, black 92%, transparent 100%);
+  transform-style: preserve-3d;
+}
+
+/* ----------------------------------------------------------
+   CARD-TURN — a scene-local 3D rotation (not part of the shared
+   AnimationEngine), used to reveal a new chapter's photograph in
+   the exact same frame. A subtle brightness dip at the edge-on
+   midpoint reads as the card catching the light as it turns,
+   rather than a flat, cheap-looking spin. Restrained: a single
+   180° pass, no bounce, no overshoot.
+   ---------------------------------------------------------- */
+.vision-mission__media-frame--turning {
+  /* 600ms matches FLIP_DURATION_MS in vision-mission.js exactly —
+     kept as a plain value here since CSS animations can't read a
+     JS constant directly; if one changes, update the other. */
+  animation: visionCardTurn 600ms var(--ease-standard) both;
+}
+
+@keyframes visionCardTurn {
+  0%   { transform: rotateY(0deg);  filter: brightness(1); }
+  50%  { transform: rotateY(90deg); filter: brightness(0.75); }
+  100% { transform: rotateY(0deg);  filter: brightness(1); }
+}
+
+.vision-mission__media-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  /* Very subtle, slow ambient drift during the scene's hold —
+     scoped to this scene, distinct from the entrance blur on
+     .vision-mission__media itself so the two never compete. */
+  animation: visionAmbientDrift 14s var(--ease-standard) 1.3s infinite alternate;
+}
+
+.vision-mission__media-frame--fallback {
+  background: var(--gradient-hero);
+}
+
+@keyframes visionAmbientDrift {
+  from { transform: scale(1); }
+  to   { transform: scale(1.035); }
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — tightens padding on smaller canvases (e.g.
+   1366x768) so the content column never feels cramped and the
+   photo frame stays comfortably inset.
+   ---------------------------------------------------------- */
+@media (max-width: 1440px) {
+  .vision-mission__content {
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .vision-mission__media {
+    padding: var(--space-lg) var(--space-lg) var(--space-lg) 0;
+  }
+
+  .vision-mission__media-frame {
+    max-width: 560px;
+  }
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE — constrained VIEWPORT HEIGHT safety net. Handles
+   the case a fixed-width breakpoint can't: a wide, fullscreen
+   monitor where the root font-size (which scales with viewport
+   width, see main.css) grows large enough that the column's
+   total content height — padding + heading + gap + panel —
+   exceeds the actual available height, quietly pushing the
+   bottom of the panel below the visible area even though the
+   viewport is plenty wide. Triggers on viewport height alone, so
+   it applies regardless of width.
+   ---------------------------------------------------------- */
+@media (max-height: 820px) {
+  .vision-mission__content {
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    gap: var(--space-sm);
+  }
+
+  .vision-mission__panel {
+    min-height: clamp(180px, 24vh, 280px);
+  }
+
+  .vision-mission__media {
+    padding-top: var(--space-sm);
+    padding-bottom: var(--space-sm);
+  }
+}
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY — guarantee the correct end state when motion
+   is disabled. Only the hero image is forced visible here, since
+   it is the one element that is genuinely permanent. The heading
+   and the Vision/Mission/Core Values panel each fade in AND out
+   on their own schedule now — main.css's global reduced-motion
+   rule already collapses their animation durations to near-zero,
+   so they still appear and disappear at the right moments, just
+   without eased motion. Forcing them permanently opaque here
+   would stop the heading from ever stepping aside and stack all
+   three sections on top of each other unreadably.
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .vision-mission__media {
+    opacity: 1;
+  }
+
+  .vision-mission__media-image {
+    animation: none;
+    transform: scale(1);
+  }
+
+  .vision-mission__media-frame--turning {
+    animation: none;
+  }
+}

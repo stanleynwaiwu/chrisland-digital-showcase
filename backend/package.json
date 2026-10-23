@@ -1,0 +1,20 @@
+{
+  "name": "chrisland-experience-backend",
+  "version": "0.1.0",
+  "description": "Lightweight local admin API for the Chrisland Experience digital display — Node.js, Express, SQLite (via Node's built-in node:sqlite module). Runs alongside the existing static presentation; the presentation continues to work if this is offline.",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "migrate": "node db/migrate.js",
+    "create-admin": "node scripts/create-admin.js"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}

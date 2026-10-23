@@ -1,0 +1,140 @@
+/* ============================================================
+   SCENES/OPENING-LOGO.CSS
+   Layout and initial-state styling for the Opening Logo Reveal
+   scene. Reuses colour, spacing, timing and easing tokens from
+   css/variables.css — no new tokens are introduced. Reuses the
+   existing .anim-* keyframes from css/animations.css for every
+   moment of motion; this file only positions and sizes things.
+   ============================================================ */
+
+.opening-logo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-charcoal-900); /* 0.0s — black screen */
+}
+
+/* ----------------------------------------------------------
+   BACKDROP — deep premium purple gradient, always present so
+   the "black screen" reads as the darkest end of the same
+   gradient rather than a separate flat colour.
+   ---------------------------------------------------------- */
+.opening-logo__backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  opacity: 0.55;
+}
+
+/* ----------------------------------------------------------
+   GLOW — soft orange/purple radial glow, hidden until the
+   0.5s timeline step fades it in via AnimationEngine.fade().
+   ---------------------------------------------------------- */
+.opening-logo__glow {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-glow);
+  opacity: 0;
+}
+
+/* ----------------------------------------------------------
+   SWEEP — reuses the existing .anim-light-sweep keyframe
+   (added to animations.css in an earlier step). Starts fully
+   transparent; the class itself drives the sweeping highlight.
+   ---------------------------------------------------------- */
+.opening-logo__sweep {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+
+/* ----------------------------------------------------------
+   PARTICLES — small, soft, semi-transparent, sparse. Hidden as
+   a group until 2.5s, then each dot ambient-floats via the
+   existing .anim-float class (applied in JS).
+   ---------------------------------------------------------- */
+.opening-logo__particles {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opening-logo__particle {
+  position: absolute;
+  border-radius: var(--radius-full);
+  background: var(--color-white);
+  opacity: 0.35;
+  filter: blur(0.5px);
+}
+
+/* ----------------------------------------------------------
+   CONTENT — centred column: logo mark, university name, tagline.
+   Centred on any canvas size (1920x1080, 4K, projector, large TV)
+   via percentage-based centring rather than fixed pixel offsets.
+   ---------------------------------------------------------- */
+.opening-logo__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  width: min(90%, var(--container-narrow));
+}
+
+/* ----------------------------------------------------------
+   INTRO VIDEO — pre-rendered animated logo video, replacing the
+   previously generated logo reveal in this same spot. Autoplays
+   via its own attributes (set in JS); no entrance animation is
+   scheduled for it since it drives its own reveal internally.
+   ---------------------------------------------------------- */
+.opening-logo__video {
+  width: min(360px, 40%);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------------
+   TITLE + TAGLINE — hidden until their timeline step; premium
+   type hierarchy using the existing display/body faces and
+   type scale.
+   ---------------------------------------------------------- */
+.opening-logo__title {
+  opacity: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: clamp(3.2rem, 4vw, var(--text-lg));
+  letter-spacing: var(--tracking-wide);
+  color: var(--color-text-primary);
+}
+
+.opening-logo__tagline {
+  opacity: 0;
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-orange-300);
+}
+
+/* ----------------------------------------------------------
+   ACCESSIBILITY — if motion is disabled, main.css already
+   collapses every animation to ~0ms; this rule additionally
+   guarantees the end state (fully visible) even for the one
+   thing this scene controls via opacity outside of an
+   animation class (the base opacity: 0 above).
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .opening-logo__glow,
+  .opening-logo__particles,
+  .opening-logo__title,
+  .opening-logo__tagline {
+    opacity: 1;
+  }
+}

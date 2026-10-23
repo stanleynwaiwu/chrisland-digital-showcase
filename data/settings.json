@@ -1,0 +1,55 @@
+{
+  "displayName": "Chrisland Experience — Main Foyer Display",
+  "orientation": "landscape",
+  "resolution": {
+    "width": 1920,
+    "height": 1080
+  },
+  "defaultSceneDurationMs": 12000,
+  "transitionDurationMs": 1200,
+  "loopPlaylist": true,
+  "presentation": {
+    "autoPlay": true,
+    "loop": true,
+    "defaultDurationMs": 12000,
+    "transitionDurationMs": 1000,
+    "keyboardShortcutsEnabled": true
+  },
+  "startTime": "06:00",
+  "endTime": "22:00",
+  "timezone": "Africa/Lagos",
+  "audio": {
+    "enabled": true,
+    "track": "assets/audio/ambient-theme.mp3",
+    "volume": 0.35,
+    "loop": true
+  },
+  "clock": {
+    "enabled": true,
+    "format": "12h"
+  },
+  "ticker": {
+    "enabled": true,
+    "speed": "medium"
+  },
+  "branding": {
+    "institutionName": "Chrisland University",
+    "motto": "Intellectual Radiance",
+    "logo": "assets/logos/chrisland-university-logo.svg",
+    "primaryColor": "#4B1F73",
+    "secondaryColor": "#FF6B35"
+  },
+  "motion": {
+    "respectReducedMotion": true,
+    "ambientIntensity": "subtle"
+  },
+  "adminPanel": {
+    "enabled": false,
+    "note": "Placeholder only — functionality not yet built."
+  },
+  "backend": {
+    "apiUrl": "http://localhost:4000/api/presentation",
+    "timeoutMs": 2500,
+    "note": "Phase 11 — optional. If unreachable, the presentation continues exactly as before with no dynamic Updates/News data."
+  }
+}

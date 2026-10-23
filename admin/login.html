@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Chrisland Experience Admin</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <main class="admin-placeholder">
+    <div class="admin-placeholder__mark" aria-hidden="true"></div>
+    <h1>Admin Sign In</h1>
+
+    <form id="login-form" novalidate>
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" autocomplete="username" required />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required />
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    <p id="status" role="status"></p>
+
+    <section id="signed-in-panel" hidden>
+      <p id="signed-in-as"></p>
+      <a id="dashboard-link" href="index.html">Go to Dashboard</a>
+      <button id="logout-button" type="button">Log Out</button>
+    </section>
+  </main>
+
+  <script type="module" src="js/auth-gate.js"></script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+/* ============================================================
+   SCENES/STUDENT-LIFE.CSS
+
+   Scene 006 — Student Life & Campus Culture
+
+   Visual language:
+   - Full-bleed cinematic background
+   - Slow Ken Burns movement
+   - Strong editorial typography
+   - Right-side photographic collage
+   - Minimal graphic decoration
+   - No cards
+   - No glassmorphism
+   - No heavy shadows
+
+   The scene deliberately uses generous negative space and
+   extended visual holds so the audience has time to read and
+   process the imagery.
+
+   Reuses project-wide colour, spacing, typography, easing and
+   sizing tokens from css/variables.css.
+
+   Purple / orange accents only.
+   ============================================================ */
+
+
+.student-life {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  background: var(--color-charcoal-900);
+}
+
+
+/* ============================================================
+   BACKGROUND
+   ============================================================ */
+
+.student-life__background {
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+}
+
+
+/**
+ * Slow cinematic camera movement.
+ *
+ * Previously:
+ *   11.5s
+ *
+ * Now:
+ *   21.5s
+ *
+ * This allows the movement to continue through almost the
+ * entire scene instead of finishing before the audience has
+ * finished processing the content.
+ */
+.student-life__background-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1);
+
+  animation:
+    studentLifeKenBurns
+    21.5s
+    var(--ease-standard)
+    0.3s
+    both;
+}
+
+
+/**
+ * Fallback when the background image cannot be loaded.
+ */
+.student-life__background--fallback {
+  background: var(--gradient-hero);
+}
+
+
+/**
+ * ------------------------------------------------------------
+ * KEN BURNS
+ * ------------------------------------------------------------
+ *
+ * Very subtle movement.
+ *
+ * The goal is not to make the background look animated.
+ * It should feel like the camera is slowly breathing.
+ */
+@keyframes studentLifeKenBurns {
+
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.06);
+  }
+}
+
+
+/* ============================================================
+   OVERLAY
+   ============================================================ */
+
+/**
+ * Stronger readability on the left while allowing the
+ * photographic background to remain visible.
+ *
+ * The right side stays lighter because that is where the
+ * collage is intended to dominate.
+ */
+.student-life__overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(20, 16, 28, 0.88) 0%,
+      rgba(20, 16, 28, 0.68) 28%,
+      rgba(20, 16, 28, 0.38) 48%,
+      rgba(20, 16, 28, 0.12) 66%,
+      transparent 76%
+    );
+}
+
+
+/* ============================================================
+   LEFT CONTENT
+   ============================================================ */
+
+.student-life__content {
+  position: absolute;
+
+  top: 50%;
+  left: var(--safe-margin);
+
+  transform: translateY(-50%);
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: var(--space-sm);
+
+  width: min(48%, 820px);
+}
+
+
+/* ------------------------------------------------------------
+   LABEL
+   ------------------------------------------------------------ */
+
+.student-life__label {
+  opacity: 0;
+
+  font-family: var(--font-mono);
+
+  font-size: var(--text-2xs);
+
+  font-weight: var(--weight-semibold);
+
+  letter-spacing: var(--tracking-wider);
+
+  text-transform: uppercase;
+
+  color: var(--color-orange-300);
+}
+
+
+/* ------------------------------------------------------------
+   MAIN HEADING
+   ------------------------------------------------------------ */
+
+.student-life__heading {
+  opacity: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  font-size:
+    clamp(
+      3.6rem,
+      4.2vw,
+      var(--text-xl)
+    );
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text-primary);
+
+  max-width: 14ch;
+}
+
+
+/* ------------------------------------------------------------
+   BODY
+   ------------------------------------------------------------ */
+
+.student-life__body {
+  opacity: 0;
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-md);
+
+  line-height: 1.65;
+
+  color: var(--color-text-muted);
+
+  max-width: 46ch;
+}
+
+
+/* ============================================================
+   LIFESTYLE HIGHLIGHTS
+   ============================================================ */
+
+.student-life__highlights {
+  margin-top: var(--space-md);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap:
+    var(--space-sm)
+    var(--space-lg);
+}
+
+
+/* ------------------------------------------------------------
+   INDIVIDUAL HIGHLIGHT
+   ------------------------------------------------------------ */
+
+.student-life__highlight {
+  opacity: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: var(--space-2xs);
+}
+
+
+/* ------------------------------------------------------------
+   HIGHLIGHT MARK
+   ------------------------------------------------------------ */
+
+.student-life__highlight-mark {
+  width: 14px;
+  height: 14px;
+
+  border-radius: var(--radius-full);
+
+  background:
+    radial-gradient(
+      circle,
+      var(--color-orange-300) 0%,
+      var(--color-purple-500) 75%
+    );
+
+  flex-shrink: 0;
+}
+
+
+/* ------------------------------------------------------------
+   HIGHLIGHT TEXT
+   ------------------------------------------------------------ */
+
+.student-life__highlight-label {
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-medium);
+
+  font-size: var(--text-xs);
+
+  color: var(--color-text-primary);
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   RIGHT-SIDE COLLAGE
+   ============================================================ */
+
+.student-life__collage {
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  width: min(34%, 640px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+/* ============================================================
+   COLLAGE ITEM
+   ============================================================ */
+
+.student-life__collage-item {
+  position: relative;
+
+  flex: 1;
+
+  overflow: hidden;
+
+  opacity: 0;
+}
+
+
+/**
+ * Image itself.
+ *
+ * A tiny amount of scale gives each photograph a more premium
+ * editorial appearance without introducing another animation
+ * dependency.
+ */
+.student-life__collage-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transform: scale(1.015);
+
+  transition:
+    transform
+    8s
+    var(--ease-standard);
+}
+
+
+/**
+ * When the tile is visible, very gently settle the photograph.
+ *
+ * This does not replace AnimationEngine's entrance animation.
+ * It simply gives the image a subtle photographic movement
+ * after appearing.
+ */
+.student-life__collage-item:hover
+.student-life__collage-image {
+  transform: scale(1.03);
+}
+
+
+/* ------------------------------------------------------------
+   COLLAGE FALLBACK
+   ------------------------------------------------------------ */
+
+.student-life__collage-item--fallback {
+  background: var(--gradient-hero);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1440px) {
+
+  .student-life__content {
+    left: var(--space-md);
+
+    width: min(55%, 620px);
+  }
+
+
+  .student-life__collage {
+    width: min(38%, 480px);
+  }
+
+
+  .student-life__highlights {
+    gap:
+      var(--space-2xs)
+      var(--space-md);
+  }
+}
+
+
+/* ============================================================
+   SMALLER HEIGHTS
+   ============================================================ */
+
+@media (max-height: 720px) {
+
+  .student-life__content {
+    gap: var(--space-xs);
+  }
+
+
+  .student-life__body {
+    font-size: var(--text-sm);
+
+    line-height: 1.5;
+
+    max-width: 43ch;
+  }
+
+
+  .student-life__highlights {
+    margin-top: var(--space-xs);
+
+    gap: var(--space-xs) var(--space-md);
+  }
+}
+
+
+/* ============================================================
+   ACCESSIBILITY — REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .student-life__label,
+  .student-life__heading,
+  .student-life__body,
+  .student-life__highlight,
+  .student-life__collage-item {
+    opacity: 1;
+  }
+
+
+  .student-life__background-image {
+    animation: none;
+
+    transform: scale(1);
+  }
+
+
+  .student-life__collage-image {
+    transition: none;
+
+    transform: scale(1);
+  }
+}

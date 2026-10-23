@@ -1,0 +1,931 @@
+/* ============================================================
+   ADMIN/DASHBOARD.CSS
+   Phase 12 — styling for the authenticated admin shell (sidebar +
+   topbar) and every page built on it (Dashboard, Presentation
+   Manager). Deliberately separate from admin.css, which stays
+   scoped to the login page only (untouched by this phase).
+
+   Admin pages intentionally do NOT load css/main.css, so the
+   display's 10px TV-scale root font-size does not apply here —
+   this file uses ordinary rem values against the browser's normal
+   16px root, the same convention admin.css already established for
+   the login page. Color tokens from css/variables.css (absolute
+   hex values, not scale-dependent) are reused throughout so the
+   admin panel reads as the same Chrisland product as the display.
+   ============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.admin-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  background: var(--color-gray-050, #F6F5F9);
+  color: var(--color-text-on-light, #14101C);
+}
+
+.admin-shell {
+  display: grid;
+  grid-template-columns: 26rem 1fr;
+  min-height: 100vh;
+}
+
+/* ----------------------------------------------------------
+   Sidebar
+   ---------------------------------------------------------- */
+
+.admin-sidebar {
+  background: var(--color-charcoal-900, #14101C);
+  color: var(--color-white, #FFFFFF);
+  padding: 2.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.admin-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0 0.4rem;
+}
+
+.admin-sidebar__mark {
+  width: 3.2rem;
+  height: 3.2rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-full, 999px);
+  background: radial-gradient(circle, var(--color-orange-300, #FFA45B) 0%, var(--color-purple-500, #6E3AA8) 70%);
+}
+
+.admin-sidebar__title {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.3;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.admin-nav__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-md, 0.8rem);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--color-gray-100, #EAE7F0);
+  text-decoration: none;
+}
+
+a.admin-nav__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-white, #FFFFFF);
+}
+
+.admin-nav__item--active {
+  background: var(--color-purple-500, #6E3AA8);
+  color: var(--color-white, #FFFFFF);
+}
+
+.admin-nav__item--disabled {
+  color: var(--color-gray-400, #9C96A8);
+  cursor: default;
+}
+
+.admin-nav__item--disabled small {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full, 999px);
+  padding: 0.2rem 0.6rem;
+}
+
+/* ----------------------------------------------------------
+   Main column: topbar + content
+   ---------------------------------------------------------- */
+
+.admin-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 3.2rem;
+  background: var(--color-white, #FFFFFF);
+  border-bottom: 1px solid var(--color-gray-100, #EAE7F0);
+}
+
+.admin-topbar__title {
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.admin-topbar__user {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  font-size: 1.4rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.admin-content {
+  padding: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+/* ----------------------------------------------------------
+   Buttons / badges
+   ---------------------------------------------------------- */
+
+.admin-button {
+  font-family: inherit;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 1rem 1.8rem;
+  border-radius: var(--radius-md, 0.8rem);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-button--primary {
+  background: var(--color-purple-500, #6E3AA8);
+  color: var(--color-white, #FFFFFF);
+}
+
+.admin-button--primary:hover:not(:disabled) {
+  background: var(--color-purple-700, #4B1F73);
+}
+
+.admin-button--ghost {
+  background: var(--color-white, #FFFFFF);
+  color: var(--color-text-on-light, #14101C);
+  border-color: var(--color-gray-100, #EAE7F0);
+}
+
+.admin-button--ghost:hover:not(:disabled) {
+  border-color: var(--color-purple-500, #6E3AA8);
+}
+
+.admin-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.admin-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radius-full, 999px);
+}
+
+.admin-badge--warning {
+  background: rgba(255, 107, 53, 0.12);
+  color: var(--color-orange-700, #D94E1F);
+}
+
+.admin-error {
+  background: rgba(217, 78, 31, 0.1);
+  color: var(--color-orange-700, #D94E1F);
+  padding: 1.4rem 1.8rem;
+  border-radius: var(--radius-md, 0.8rem);
+  font-size: 1.4rem;
+}
+
+/* ----------------------------------------------------------
+   Dashboard — stat cards
+   ---------------------------------------------------------- */
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1.6rem;
+}
+
+.stat-card {
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  padding: 2rem;
+}
+
+.stat-card__label {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.stat-card__value {
+  margin: 0;
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: 3.2rem;
+  font-weight: 600;
+  color: var(--color-purple-700, #4B1F73);
+}
+
+.admin-panel {
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: flex-start;
+}
+
+.admin-panel h2 {
+  margin: 0;
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: 1.8rem;
+}
+
+.admin-panel p {
+  margin: 0;
+  color: var(--color-gray-400, #9C96A8);
+  font-size: 1.4rem;
+}
+
+/* ----------------------------------------------------------
+   Presentation Manager
+   ---------------------------------------------------------- */
+
+.presentation-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.presentation-toolbar__hint {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.presentation-toolbar__actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.presentation-status {
+  font-size: 1.4rem;
+  padding: 1rem 1.4rem;
+  border-radius: var(--radius-md, 0.8rem);
+  background: var(--color-gray-100, #EAE7F0);
+}
+
+.presentation-status--success {
+  background: rgba(110, 58, 168, 0.1);
+  color: var(--color-purple-700, #4B1F73);
+}
+
+.presentation-status--error {
+  background: rgba(217, 78, 31, 0.1);
+  color: var(--color-orange-700, #D94E1F);
+}
+
+.scene-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.scene-row {
+  display: grid;
+  grid-template-columns: 2.4rem 3rem 1fr 18rem 10rem;
+  align-items: center;
+  gap: 1.6rem;
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  padding: 1.4rem 1.8rem;
+  cursor: grab;
+}
+
+.scene-row--dragging {
+  opacity: 0.5;
+}
+
+.scene-row--drop-target {
+  border-color: var(--color-purple-500, #6E3AA8);
+  box-shadow: 0 0 0 2px rgba(110, 58, 168, 0.25);
+}
+
+.scene-row__handle {
+  color: var(--color-gray-400, #9C96A8);
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.scene-row__order {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.3rem;
+  color: var(--color-gray-400, #9C96A8);
+  text-align: center;
+}
+
+.scene-row__info {
+  min-width: 0;
+}
+
+.scene-row__name {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.scene-row__id {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.2rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.scene-row__duration {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 1.1rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.scene-row__duration input {
+  font-family: inherit;
+  font-size: 1.3rem;
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm, 0.4rem);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+}
+
+/* Phase 14 — read-only calculated duration for Latest Updates / Latest News */
+.scene-row__duration--calculated {
+  min-width: 14rem;
+}
+
+.scene-row__calculated-value {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--color-charcoal-900, #14101C);
+}
+
+.scene-row__calculated-value--empty {
+  font-weight: 500;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.scene-row__calculated-hint {
+  font-size: 1.1rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.scene-row__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  justify-self: end;
+}
+
+.scene-row__toggle input {
+  width: 3.6rem;
+  height: 2rem;
+  appearance: none;
+  background: var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-full, 999px);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.scene-row__toggle input::before {
+  content: '';
+  position: absolute;
+  top: 0.2rem;
+  left: 0.2rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: var(--color-white, #FFFFFF);
+  transition: transform 0.15s ease;
+}
+
+.scene-row__toggle input:checked {
+  background: var(--color-purple-500, #6E3AA8);
+}
+
+.scene-row__toggle input:checked::before {
+  transform: translateX(1.6rem);
+}
+
+.scene-row__status {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-gray-400, #9C96A8);
+  min-width: 5.5rem;
+}
+
+/* ----------------------------------------------------------
+   Record Manager — Updates & News (Phase 13)
+
+   Shared by admin/updates.html and admin/news.html. Deliberately
+   reuses existing primitives rather than inventing new ones:
+   .admin-button / .admin-badge for actions and status, and
+   .presentation-status (Phase 12) for the single-line loading/
+   success/error feedback row, same convention as the Presentation
+   Manager's #presentation-status. Only genuinely new pieces are the
+   record list/card layout and the create/edit form fields below.
+   ---------------------------------------------------------- */
+
+.record-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.record-toolbar__hint {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.record-toolbar__actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-badge--success {
+  background: rgba(110, 58, 168, 0.12);
+  color: var(--color-purple-700, #4B1F73);
+}
+
+.admin-button--danger {
+  background: var(--color-white, #FFFFFF);
+  color: var(--color-orange-700, #D94E1F);
+  border-color: rgba(217, 78, 31, 0.3);
+}
+
+.admin-button--danger:hover:not(:disabled) {
+  background: rgba(217, 78, 31, 0.08);
+  border-color: var(--color-orange-700, #D94E1F);
+}
+
+/* ---- Create/edit form ---- */
+
+.record-form {
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  padding: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+/* The [hidden] attribute (used by updates-page.js/news-page.js to
+   show/hide the create/edit panel) is otherwise overridden by the
+   `display: flex` above — same specificity, later in the cascade. */
+.record-form[hidden] {
+  display: none;
+}
+
+.record-form h2 {
+  margin: 0;
+  font-family: var(--font-display, 'Fraunces', serif);
+  font-size: 1.8rem;
+}
+
+.record-form__grid {
+  display: grid;
+  /* min(20rem, 100%) rather than a bare 20rem floor — otherwise a
+     narrow viewport (phone width, after the sidebar/content/form
+     padding is subtracted) has less than 20rem available and the
+     fixed-floor track forces the grid wider than its container. */
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: 1.6rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field--full {
+  grid-column: 1 / -1;
+}
+
+.form-field label {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-text-on-light, #14101C);
+}
+
+.form-field__hint {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: inherit;
+  font-size: 1.4rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-sm, 0.4rem);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  background: var(--color-white, #FFFFFF);
+  color: var(--color-text-on-light, #14101C);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--color-purple-500, #6E3AA8);
+  box-shadow: 0 0 0 2px rgba(110, 58, 168, 0.15);
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* ---- Record list ---- */
+
+.record-empty {
+  margin: 0;
+  padding: 2.4rem;
+  text-align: center;
+  color: var(--color-gray-400, #9C96A8);
+  background: var(--color-white, #FFFFFF);
+  border: 1px dashed var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  font-size: 1.4rem;
+}
+
+.record-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.record-card {
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  border-radius: var(--radius-lg, 1.2rem);
+  padding: 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.record-card--busy {
+  opacity: 0.6;
+}
+
+.record-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.record-card__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.record-card__meta {
+  margin: 0.3rem 0 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-400, #9C96A8);
+  font-family: var(--font-mono, monospace);
+}
+
+.record-card__summary {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--color-text-on-light, #14101C);
+  line-height: 1.5;
+  /* Admin-authored free text can include an unbroken run like a URL
+     (e.g. a real seeded update's "admissions.chrislanduniversity.edu.ng")
+     with no natural wrap point — without this, one such run forces
+     the card, and every ancestor up to the page, wider than the
+     viewport on narrow screens. */
+  overflow-wrap: anywhere;
+}
+
+.record-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+@media (max-width: 960px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+  }
+
+  /* Pre-existing gap (surfaced while verifying Phase 13's new pages
+     on small screens, but not specific to them — it also affected
+     the Presentation Manager): a grid item's default min-width is
+     `auto` (its content's min-content size), not 0. With only one
+     explicit 1fr column, the track still had to fit the sidebar's
+     non-wrapping nav row, so the whole shell — and every page built
+     on it — was forced wider than the viewport despite this block's
+     single-column intent. min-width: 0 lets both grid items actually
+     shrink to the viewport, so overflow-x: auto on the sidebar (just
+     below) and normal wrapping elsewhere can do their job. */
+  .admin-sidebar,
+  .admin-main {
+    min-width: 0;
+  }
+
+  .admin-sidebar {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  /* Pre-existing gap: the topbar's title + username/logout block
+     never wrapped, so it overflowed the viewport on phone widths on
+     every admin page. Wrapping only below this existing breakpoint
+     — no change to the desktop/tablet layout above it. */
+  .admin-topbar {
+    flex-wrap: wrap;
+    gap: 1rem;
+    row-gap: 0.8rem;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+  }
+
+  /* Pre-existing gap: three un-abbreviated button labels
+     ("Preview Presentation" / "Discard Changes" / "Save Changes")
+     never wrapped, so this row alone forced the Presentation
+     Manager wider than the viewport on phone widths — independently
+     of the grid fix above. Same treatment extended to the Updates/
+     News toolbar for consistency, should its single button ever be
+     joined by others. */
+  .presentation-toolbar__actions,
+  .record-toolbar__actions {
+    flex-wrap: wrap;
+  }
+
+  .scene-row {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .scene-row__toggle {
+    justify-self: start;
+  }
+
+  .record-card__header {
+    flex-direction: column;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions .admin-button {
+    flex: 1;
+  }
+}
+
+
+/* ---- Phase 15: media control + list thumbnail ---- */
+
+.media-field {
+  gap: 0.8rem;
+}
+
+.media-field input[type='file'] {
+  padding: 0.7rem 1.1rem;
+}
+
+.media-field__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.media-field__preview img,
+.media-field__preview video {
+  max-width: min(48rem, 100%);
+  max-height: 24rem;
+  border-radius: var(--radius-sm, 0.4rem);
+  border: 1px solid var(--color-gray-100, #EAE7F0);
+  background: #14101c;
+  object-fit: contain;
+}
+
+.media-field__caption,
+.media-field__note,
+.media-field__missing {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-400, #9C96A8);
+}
+
+.media-field__note--error,
+.media-field__missing {
+  color: var(--color-orange-700, #D94E1F);
+  font-weight: 600;
+}
+
+.media-field__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.media-field__actions[hidden],
+.media-field__options[hidden],
+.media-field__preview[hidden],
+.media-field__actions > [hidden] {
+  display: none;
+}
+
+.media-field__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
+  gap: 1.6rem;
+}
+
+.record-card__lead {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+.record-card__thumb {
+  flex: none;
+  width: 8rem;
+  height: 5rem;
+  border-radius: var(--radius-sm, 0.4rem);
+  overflow: hidden;
+  background: #14101c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.record-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.record-card__thumb--missing {
+  background: var(--color-gray-100, #EAE7F0);
+  color: var(--color-gray-400, #9C96A8);
+}
+
+/* ============================================================
+   Phase 16 — Scene Content editor (admin/scene-content.html).
+   Reuses .form-field, .admin-button and .presentation-status.
+   ============================================================ */
+.sc-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 16px;
+}
+.sc-scene-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.sc-scene-list button {
+  text-align: left;
+}
+.sc-scene-list button[aria-current='true'] {
+  border-color: var(--color-gold, #c9a227);
+  color: var(--color-gold, #c9a227);
+}
+.sc-editor {
+  min-width: 0;
+}
+.sc-section {
+  margin: 0 0 20px;
+}
+.sc-section h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+.sc-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.sc-item {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.sc-item__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.sc-item__actions {
+  display: flex;
+  gap: 6px;
+}
+.sc-counter {
+  font-size: 0.75rem;
+  opacity: 0.65;
+}
+.sc-media {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+}
+.sc-media__state {
+  margin: 4px 0 8px;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+.sc-media__preview img,
+.sc-media__preview video {
+  max-width: 240px;
+  max-height: 140px;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 8px;
+}
+.sc-media__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.sc-savebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+@media (max-width: 800px) {
+  .sc-layout {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "scenes": [
+    {
+      "id": "welcome-scene",
+      "order": 1,
+      "type": "hero",
+      "title": "Welcome to Chrisland University",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "vision-mission-values",
+      "order": 2,
+      "type": "split",
+      "title": "Vision, Mission & Core Values",
+      "durationMs": 26750,
+      "transition": "blur",
+      "status": "built"
+    },
+    {
+      "id": "campus-experience",
+      "order": 3,
+      "type": "hero",
+      "title": "Campus Experience",
+      "durationMs": 13000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "academic-programmes",
+      "order": 4,
+      "type": "cinematic",
+      "title": "Faculties & Academic Programmes",
+      "durationMs": 24000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "student-life",
+      "order": 5,
+      "type": "collage",
+      "title": "Student Life & Campus Culture",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "research-innovation",
+      "order": 6,
+      "type": "mosaic",
+      "title": "Research, Innovation & Facilities",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "graduate-success",
+      "order": 7,
+      "type": "split",
+      "title": "Graduate Success & Career Development",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "admissions",
+      "order": 8,
+      "type": "split",
+      "title": "Admissions & How to Apply",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "contact",
+      "order": 9,
+      "type": "three-zone",
+      "title": "Contact, Visit Us & Connect",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "built"
+    },
+    {
+      "id": "scene-about",
+      "order": 10,
+      "type": "split",
+      "title": "About the University",
+      "durationMs": 12000,
+      "transition": "slide",
+      "status": "not-built"
+    },
+    {
+      "id": "scene-leadership",
+      "order": 11,
+      "type": "grid",
+      "title": "Leadership Showcase",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "not-built"
+    },
+    {
+      "id": "scene-colleges",
+      "order": 12,
+      "type": "grid",
+      "title": "Colleges & Programmes",
+      "durationMs": 14000,
+      "transition": "slide",
+      "status": "not-built"
+    },
+    {
+      "id": "scene-news",
+      "order": 13,
+      "type": "list",
+      "title": "News, Events & Announcements",
+      "durationMs": 12000,
+      "transition": "fade",
+      "status": "not-built"
+    },
+    {
+      "id": "scene-achievements",
+      "order": 14,
+      "type": "hero",
+      "title": "Awards & Achievements",
+      "durationMs": 10000,
+      "transition": "blur",
+      "status": "not-built"
+    }
+  ]
+}

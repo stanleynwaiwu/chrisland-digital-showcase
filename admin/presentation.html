@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentation Manager — Chrisland Experience Admin</title>
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body class="admin-body">
+  <div class="admin-shell">
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar__brand">
+        <span class="admin-sidebar__mark" aria-hidden="true"></span>
+        <span class="admin-sidebar__title">Chrisland Experience</span>
+      </div>
+      <nav class="admin-nav" aria-label="Admin sections">
+        <a class="admin-nav__item" data-nav="dashboard" href="index.html">Dashboard</a>
+        <a class="admin-nav__item" data-nav="presentation" href="presentation.html">Presentation</a>
+        <a class="admin-nav__item" data-nav="updates" href="updates.html">Updates</a>
+        <a class="admin-nav__item" data-nav="news" href="news.html">News</a>
+        <a class="admin-nav__item" data-nav="scene-content" href="scene-content.html">Scene Content</a>
+        <span class="admin-nav__item admin-nav__item--disabled" aria-disabled="true">Media <small>Soon</small></span>
+        <span class="admin-nav__item admin-nav__item--disabled" aria-disabled="true">Settings <small>Soon</small></span>
+      </nav>
+    </aside>
+
+    <div class="admin-main">
+      <header class="admin-topbar">
+        <h1 class="admin-topbar__title">Presentation Manager</h1>
+        <div class="admin-topbar__user">
+          <span id="admin-username"></span>
+          <button id="admin-logout" type="button" class="admin-button admin-button--ghost">Log Out</button>
+        </div>
+      </header>
+
+      <main class="admin-content">
+        <div class="presentation-toolbar">
+          <p class="presentation-toolbar__hint">Drag a row to reorder. Changes are staged until you press Save.</p>
+          <div class="presentation-toolbar__actions">
+            <button id="preview-button" type="button" class="admin-button admin-button--ghost">Preview Presentation</button>
+            <button id="discard-changes-button" type="button" class="admin-button admin-button--ghost" disabled>Discard Changes</button>
+            <button id="save-order-button" type="button" class="admin-button admin-button--primary" disabled>Save Changes</button>
+          </div>
+        </div>
+
+        <p id="unsaved-indicator" class="admin-badge admin-badge--warning" hidden>Unsaved changes</p>
+        <p id="presentation-status" class="presentation-status" hidden></p>
+
+        <ul id="scene-list" class="scene-list" aria-label="Presentation scenes"></ul>
+      </main>
+    </div>
+  </div>
+
+  <script type="module" src="js/presentation-page.js"></script>
+</body>
+</html>

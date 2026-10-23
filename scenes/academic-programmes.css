@@ -1,0 +1,540 @@
+/* ============================================================
+   SCENES/ACADEMIC-PROGRAMMES.CSS
+
+   Styling for the cinematic Academic Programmes scene.
+
+   Four full-screen movements are stacked and crossfaded by JS.
+
+   Visual language:
+   - Cinematic
+   - Editorial
+   - Premium
+   - Minimal
+   - Purple / orange accents
+   - No glassmorphism
+   - No unnecessary cards
+   - Thin structural dividers
+   - Strong photographic/video hierarchy
+
+   Movement 2 intentionally gives Natural & Applied Sciences
+   the large editorial panel because Sciences is a major academic
+   pillar of the institution.
+
+   ============================================================ */
+
+
+.academic-programmes {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--color-charcoal-900);
+}
+
+
+/* ============================================================
+   MOVEMENT — SHARED BASE
+   ============================================================ */
+
+.academic-programmes__movement {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+
+/* ============================================================
+   MOVEMENT 1 — OPENING / INVITATION
+   ============================================================ */
+
+.academic-programmes__opening-media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+
+.academic-programmes__opening-media-asset {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.academic-programmes__opening-media--fallback {
+  background: var(--gradient-hero);
+}
+
+
+/*
+  Cinematic readability layer.
+
+  The centre is slightly darker because that is where the
+  typography lives, while the edges retain more of the
+  underlying footage.
+*/
+
+.academic-programmes__opening-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(20, 16, 28, 0.62) 0%,
+      rgba(20, 16, 28, 0.35) 42%,
+      rgba(20, 16, 28, 0.48) 100%
+    );
+}
+
+
+.academic-programmes__opening-content {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  gap: var(--space-sm);
+
+  padding: 0 var(--safe-margin);
+}
+
+
+/* ------------------------------------------------------------
+   OPENING LABEL
+   ------------------------------------------------------------ */
+
+.academic-programmes__opening-label {
+  opacity: 0;
+
+  font-family: var(--font-mono);
+
+  font-size: var(--text-2xs);
+
+  font-weight: var(--weight-semibold);
+
+  letter-spacing: var(--tracking-wider);
+
+  text-transform: uppercase;
+
+  color: var(--color-orange-300);
+
+  text-shadow:
+    0 2px 10px rgba(20, 16, 28, 0.85);
+}
+
+
+/* ------------------------------------------------------------
+   OPENING HEADING
+   ------------------------------------------------------------ */
+
+.academic-programmes__opening-heading {
+  opacity: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  font-size: clamp(
+    4rem,
+    5.5vw,
+    var(--text-2xl)
+  );
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text-primary);
+
+  max-width: 16ch;
+
+  text-shadow:
+    0 4px 22px rgba(20, 16, 28, 0.9),
+    0 1px 5px rgba(20, 16, 28, 0.95);
+}
+
+
+/* ------------------------------------------------------------
+   OPENING SUPPORTING TEXT
+   ------------------------------------------------------------ */
+
+.academic-programmes__opening-supporting {
+  opacity: 0;
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-md);
+
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-primary);
+
+  max-width: 40ch;
+
+  text-shadow:
+    0 2px 12px rgba(20, 16, 28, 0.9);
+}
+
+
+/* ============================================================
+   PROGRAMME PANEL — SHARED COMPONENT
+   ============================================================ */
+
+.academic-programmes__panel {
+  position: relative;
+  overflow: hidden;
+
+  background: var(--color-charcoal-900);
+}
+
+
+/* ------------------------------------------------------------
+   MEDIA
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel-media {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  opacity: 0;
+}
+
+
+.academic-programmes__panel-media-asset {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.academic-programmes__panel-media--fallback {
+  background: var(--gradient-hero);
+}
+
+
+/* ------------------------------------------------------------
+   PANEL READABILITY OVERLAY
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      0deg,
+      rgba(20, 16, 28, 0.92) 0%,
+      rgba(20, 16, 28, 0.68) 22%,
+      rgba(20, 16, 28, 0.22) 52%,
+      transparent 76%
+    );
+}
+
+
+/* ------------------------------------------------------------
+   PANEL TEXT
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel-text {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  opacity: 0;
+
+  padding: var(--space-sm);
+
+  display: flex;
+  flex-direction: column;
+
+  gap: var(--space-3xs);
+}
+
+
+.academic-programmes__panel-title {
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  font-size: var(--text-sm);
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-tight);
+
+  color: var(--color-text-primary);
+
+  text-shadow:
+    0 3px 15px rgba(20, 16, 28, 0.95);
+}
+
+
+.academic-programmes__panel-description {
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-xs);
+
+  line-height: var(--leading-normal);
+
+  color: var(--color-text-primary);
+
+  max-width: 34ch;
+
+  text-shadow:
+    0 2px 10px rgba(20, 16, 28, 0.9);
+}
+
+
+/* ============================================================
+   MOVEMENT 2 — FIRST THREE PROGRAMMES
+
+   IMPORTANT:
+
+   First panel = Natural & Applied Sciences
+
+   Therefore Sciences receives the large editorial position.
+
+   Layout:
+
+   ┌───────────────────────┬───────────────┐
+   │                       │               │
+   │                       │   COMPUTING   │
+   │      SCIENCES         │               │
+   │       LARGE           ├───────────────┤
+   │                       │               │
+   │                       │  MANAGEMENT   │
+   │                       │               │
+   └───────────────────────┴───────────────┘
+
+   ============================================================ */
+
+.academic-programmes__triad {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    1.4fr 1fr;
+
+  grid-template-rows:
+    1fr 1fr;
+
+  gap: 4px;
+
+  background:
+    var(--color-charcoal-900);
+}
+
+
+/* ------------------------------------------------------------
+   LARGE PANEL
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel--large {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+
+/* ------------------------------------------------------------
+   MEDIUM PANELS
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel--medium:nth-of-type(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+
+.academic-programmes__panel--medium:nth-of-type(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+
+/* ------------------------------------------------------------
+   LARGE PANEL TYPOGRAPHY
+
+   Sciences gets stronger visual presence through typography
+   rather than extra decoration.
+   ------------------------------------------------------------ */
+
+.academic-programmes__panel--large .academic-programmes__panel-title {
+  font-size: var(--text-lg);
+}
+
+
+.academic-programmes__panel--large
+.academic-programmes__panel-description {
+  font-size: var(--text-sm);
+}
+
+
+.academic-programmes__panel--large
+.academic-programmes__panel-text {
+  padding: var(--space-lg);
+}
+
+
+/* ============================================================
+   MOVEMENT 3 — SECOND THREE PROGRAMMES
+
+   Triptych:
+
+   Arts | Law | Postgraduate
+
+   ============================================================ */
+
+.academic-programmes__triptych {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  grid-template-rows:
+    1fr;
+
+  gap: 4px;
+
+  background:
+    var(--color-charcoal-900);
+}
+
+
+/* ============================================================
+   MOVEMENT 4 — CLOSING
+   ============================================================ */
+
+.academic-programmes__closing-content {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  gap: var(--space-sm);
+
+  padding: 0 var(--safe-margin);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(91, 45, 145, 0.16),
+      transparent 60%
+    );
+}
+
+
+.academic-programmes__closing-heading {
+  opacity: 0;
+
+  font-family: var(--font-display);
+
+  font-weight: var(--weight-semibold);
+
+  font-size: clamp(
+    3.6rem,
+    4.4vw,
+    var(--text-xl)
+  );
+
+  line-height: var(--leading-tight);
+
+  letter-spacing: var(--tracking-wide);
+
+  color: var(--color-text-primary);
+
+  max-width: 20ch;
+
+  text-shadow:
+    0 4px 22px rgba(20, 16, 28, 0.9);
+}
+
+
+.academic-programmes__closing-supporting {
+  opacity: 0;
+
+  font-family: var(--font-body);
+
+  font-weight: var(--weight-regular);
+
+  font-size: var(--text-md);
+
+  line-height: var(--leading-normal);
+
+  color: var(--color-orange-300);
+
+  max-width: 40ch;
+
+  text-shadow:
+    0 2px 10px rgba(20, 16, 28, 0.85);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1440px) {
+
+  .academic-programmes__panel-text {
+    padding: var(--space-xs);
+  }
+
+
+  .academic-programmes__panel--large
+  .academic-programmes__panel-text {
+    padding: var(--space-md);
+  }
+
+
+  .academic-programmes__opening-content,
+  .academic-programmes__closing-content {
+    padding: 0 var(--space-md);
+  }
+
+
+  .academic-programmes__panel--large
+  .academic-programmes__panel-title {
+    font-size: var(--text-md);
+  }
+
+
+  .academic-programmes__panel--large
+  .academic-programmes__panel-description {
+    font-size: var(--text-xs);
+  }
+}

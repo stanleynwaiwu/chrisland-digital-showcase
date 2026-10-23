@@ -1,0 +1,27 @@
+/* ============================================================
+   SCENES/LATEST-UPDATES.CSS
+   Scene frame + background for the dynamic Latest Updates scene
+   (Phase 11 identity, unchanged). Phase 14 replaced the old
+   all-in-one list with one slide per update — slide styling now
+   lives in scenes/dynamic-sections.css.
+   ============================================================ */
+
+.latest-updates-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-purple-900) 0%, var(--color-charcoal-900) 72%);
+}
+
+.latest-updates-scene__background {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 82% 18%, var(--color-purple-500) 0%, transparent 52%),
+    radial-gradient(circle at 12% 88%, var(--color-orange-700) 0%, transparent 42%);
+  opacity: 0.35;
+}
